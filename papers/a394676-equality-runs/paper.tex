@@ -1,0 +1,286 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,microtype,booktabs,needspace}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\N}{\mathbb N}
+\newcommand{\ind}{\mathbf 1}
+\title{Exact long equality runs in a greedy sequence\protect\\avoiding four-term sums}
+\author{Mark Vladimir Prizmic}
+\date{November 27, 2026\quad Version 0.1}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $(a_n)$ be the increasing greedy sequence starting at $1$ that excludes
+sums of four consecutive previously selected terms. We prove that its maximal
+runs of equality with $\lfloor(5n-1)/4\rfloor$, of length at least four, are
+exactly the intervals
+\[
+ \left[\frac{7\cdot16^m-2}{5},\frac{12\cdot16^m+8}{5}\right],
+ \qquad m\ge0.
+\]
+Their lengths are $16^m+3$. This establishes the length formula recorded as
+Conjecture~2 in OEIS A394676, with corrected endpoints for several displayed
+examples. The proof gives an exact recursion for the extreme values of the
+complementary sequence of forbidden sums. All arguments needed for the result
+are included.
+\end{abstract}
+
+\section{The sequence and the result}
+
+Set $a_1=1$. After $a_1,\ldots,a_n$ have been selected, choose $a_{n+1}$ as
+the smallest integer greater than $a_n$ outside
+\[
+ \{a_j+a_{j+1}+a_{j+2}+a_{j+3}:1\le j\le n-3\}.
+\]
+The forbidden set is empty for $n<4$. Consecutive refers to positions in the
+selected sequence. This is Hoang Xuan Thanh's sequence A394676~\cite{oeis}.
+Put
+\[
+ U_n=\left\lfloor\frac{5n-1}{4}\right\rfloor,
+ \qquad b_j=\sum_{t=0}^3a_{j+t}.
+\]
+An \emph{equality run} is an interval of consecutive indices on which $a_n=U_n$;
+it is maximal if it cannot be extended in either direction.
+
+\begin{theorem}\label{thm:runs}
+The maximal equality runs of length at least four are exactly
+\begin{equation}\label{eq:runs}
+ [S_m,E_m]_{\mathbb Z},\qquad
+ S_m=\frac{7\cdot16^m-2}{5},\qquad
+ E_m=\frac{12\cdot16^m+8}{5},\qquad m\ge0.
+\end{equation}
+Their lengths are $E_m-S_m+1=16^m+3$. Every other maximal equality run has
+length at most three.
+\end{theorem}
+
+The first five runs are as follows.
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$m$ & First index & Last index & Length\\
+\midrule
+0&1&4&4\\
+1&22&40&19\\
+2&358&616&259\\
+3&5\,734&9\,832&4\,099\\
+4&91\,750&157\,288&65\,539\\
+\bottomrule
+\end{tabular}
+\end{center}
+The retrieved OEIS entry gives the same length formula, but its third, fourth,
+and fifth displayed intervals have both endpoints one too large. The
+qualification ``length at least four'' is necessary: shorter maximal runs
+also occur.
+
+\section{Complementarity and uniform bounds}
+
+The next lemma is the four-term case of the companion general-bound
+note~\cite{bounds}. We include its proof so the present argument is complete.
+
+\begin{lemma}\label{lem:bounds}
+The increasing sequences $(a_n)$ and $(b_j)$ partition the positive integers.
+For every $j\ge1$,
+\begin{equation}\label{eq:b-bound}
+ 5j\le b_j\le5j+5.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Only finitely many integers are forbidden at any finite stage, so the
+construction continues indefinitely. Every $b_j$ exceeds its largest summand
+$a_{j+3}$, and becomes forbidden when that summand is selected, before the
+greedy construction can reach $b_j$. Conversely, an omitted positive integer
+must already have been forbidden when the greedy construction skipped it.
+Also $b_{j+1}-b_j=a_{j+4}-a_j\ge4$, so the forbidden sums are distinct. This
+proves complementarity and, in particular,
+\begin{equation}\label{eq:count}
+ a_i-i=\#\{k:b_k<a_i\}.
+\end{equation}
+
+We prove~\eqref{eq:b-bound} by strong induction on $j$. The base case is
+$b_1=1+2+3+4=10$. Fix $j\ge2$ and assume the bounds at every smaller index.
+For $i\in\{j,j+1,j+2,j+3\}$, set $m=a_i-i$. Since $b_j>a_{j+3}\ge a_i$,
+equation~\eqref{eq:count} gives $0\le m<j$.
+If $m\ge1$, then $5m\le b_m<a_i$, which yields
+\[
+ a_i\le U_i=\left\lfloor\frac{5i-1}{4}\right\rfloor.
+\]
+For $m=0$, this inequality follows from $a_i=i$.
+
+If $m+1<j$, then $a_i<b_{m+1}\le5(m+1)+5$; integrality gives
+$4a_i\ge5i-9$, or
+\[
+ a_i\ge L_i:=\left\lfloor\frac{5i-6}{4}\right\rfloor.
+\]
+For the remaining case $m=j-1$, we have $a_i=i+j-1$ and
+\[
+ 4a_i-(5i-9)=4j+5-i\ge3j+2>0,
+\]
+so the same lower estimate holds. Finally, for every integer $x$,
+$\sum_{t=0}^3\lfloor(x+t)/4\rfloor=x$. Consequently,
+\[
+ \sum_{i=j}^{j+3}L_i=5j,
+ \qquad \sum_{i=j}^{j+3}U_i=5j+5.
+\]
+Summing the estimates on $a_i$ proves the induction step.
+\end{proof}
+
+Define
+\[
+ d_j=b_j-5j\quad(j\ge1),\qquad d_0=b_0=0,
+ \qquad e_n=U_n-a_n.
+\]
+Here index zero is only boundary notation. Lemma~\ref{lem:bounds} and strict
+increase give
+\begin{equation}\label{eq:d}
+ 0\le d_j\le5,\qquad d_{j+1}\ge d_j-1\quad(j\ge0).
+\end{equation}
+The inequality at $j=0$ follows directly from $d_1=5$.
+
+\section{An exact error formula}
+
+\begin{lemma}\label{lem:error}
+The first four errors are zero. For $q\ge1$ and $1\le s\le4$,
+\begin{equation}\label{eq:error}
+ e_{4q+s}=\ind_{\{d_q\ge s\}}+
+           \ind_{\{s=1,\ d_{q-1}=5\}}.
+\end{equation}
+Furthermore,
+\begin{equation}\label{eq:window}
+ d_j=5-(e_j+e_{j+1}+e_{j+2}+e_{j+3}).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $u=U_{4q+s}=5q+s$. If $d_q<s$, then
+$b_q<u<b_{q+1}$. Thus $u$ is selected and exactly $q$ forbidden integers are
+below it; its selected index is $u-q=4q+s$. The error is zero. In this case
+$d_{q-1}=5$ cannot coexist with $s=1$, by~\eqref{eq:d}.
+
+Suppose $d_q\ge s$. For $s\ge2$,
+\[
+ b_{q-1}\le5q<u-1<b_q.
+\]
+The convention $b_0=0$ covers $q=1$. Therefore $u-1$ is selected with exactly
+$q-1$ forbidden values below it; its selected index is again $4q+s$, giving
+error one.
+
+For $s=1$ and $d_q\ge1$, if $d_{q-1}<5$, then
+$b_{q-1}<5q<b_q$, and the same count gives error one. If $d_{q-1}=5$, then
+$q\ge2$, $b_{q-1}=5q$, and $d_q\ge4$. The bounds on the preceding forbidden
+term, or $b_0=0$ for $q=2$, give
+\[
+ b_{q-2}<5q-1<b_{q-1}.
+\]
+Hence $5q-1$ has selected index $5q-1-(q-2)=4q+1$, giving error two.
+This proves~\eqref{eq:error}. Since the four consecutive values
+$U_j,\ldots,U_{j+3}$ sum to $5j+5$, their errors sum to $5-d_j$, proving
+\eqref{eq:window}.
+\end{proof}
+
+\section{The two extreme sets}
+
+Put
+\[
+ F=\{j\ge1:d_j=5\},\qquad Z=\{j\ge1:d_j=0\}.
+\]
+\begin{lemma}\label{lem:sets}
+These sets satisfy
+\begin{align}
+ Z&=\bigcup_{k\in F}[4k+2,4k+5]_{\mathbb Z},\label{eq:Z}\\
+ F&=\{1\}\cup\bigcup_{k\in Z}[4k-2,4k+1]_{\mathbb Z}.
+ \label{eq:F}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Every four-term error window contains at most one error equal to two, because
+such an error occurs only at an index congruent to one modulo four. Its sum
+is five exactly when it contains a two and three ones.
+By~\eqref{eq:error}, a two occurs at $4q+1$ exactly when $d_{q-1}=5$.
+Then $d_q\ge4$, by~\eqref{eq:d}. The three preceding errors and the three
+following errors are all one. Thus the four windows containing this two all
+have sum five, and their starting indices are $4q-2,\ldots,4q+1$.
+Equation~\eqref{eq:window}, with $k=q-1$, proves~\eqref{eq:Z} in both
+directions.
+
+For~\eqref{eq:F}, a value $d_j=5$ is equivalent to four consecutive zero
+errors beginning at $j$. The initial zero window contributes $1\in F$.
+Every four-term window starting at $j\ge2$ contains exactly one index
+$4q+1$ with $q\ge1$. The error at this index is zero exactly when $d_q=0$.
+In that case~\eqref{eq:d} implies $d_{q-1}\le1$. Formula~\eqref{eq:error}
+then makes all three preceding and all three following errors zero. The
+four windows containing the central index therefore start at
+$4q-2,\ldots,4q+1$, and these are all the remaining positions in $F$.
+\end{proof}
+
+\section{The expanding recurrence and the runs}
+
+Substitution of~\eqref{eq:Z} into~\eqref{eq:F} gives
+\begin{equation}\label{eq:recurrence}
+ F=\{1\}\cup\bigcup_{k\in F}[16k+6,16k+21]_{\mathbb Z}.
+\end{equation}
+The four consecutive indices $4k+2,\ldots,4k+5$ generate adjacent
+four-integer intervals, whose union has precisely these endpoints.
+
+Every generated index is larger than its parent. Thus any member of $F$
+other than $1$ descends through smaller parents to $1$, and repeated
+expansion of $\{1\}$ produces every member of $F$. Starting at
+$I_0=[1,1]$, write $I_m=[\ell_m,r_m]$ for the interval at generation $m$.
+Consecutive parents generate adjacent sixteen-integer intervals, so
+\[
+ \ell_{m+1}=16\ell_m+6,\qquad r_{m+1}=16r_m+21.
+\]
+Solving yields
+\begin{equation}\label{eq:endpoints}
+ \ell_m=\frac{7\cdot16^m-2}{5},\qquad
+ r_m=\frac{12\cdot16^m-7}{5}.
+\end{equation}
+The endpoints are integers because $16^m\equiv1\pmod5$. Each interval has
+length $16^m$, and
+$\ell_{m+1}-r_m=20\cdot16^m+1>1$; consequently these are exactly the
+maximal intervals in $F$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:runs}]
+By~\eqref{eq:window}, a maximal zero-error run $[u,v]$ of length at least
+four corresponds to the maximal interval $[u,v-3]$ in $F$. Conversely, a
+maximal interval $[\ell,r]$ in $F$ gives zero errors on $[\ell,r+3]$; a
+zero just outside either endpoint would extend the interval in $F$.
+Applying this bijection to~\eqref{eq:endpoints} gives~\eqref{eq:runs},
+including maximality and the assertion that all other runs have length
+at most three.
+\end{proof}
+
+\section{Verification and research status}
+
+An exact implementation of the original greedy definition was checked
+through $400\,000$ selected terms. The error formula, both extreme-set
+identities, and the expanding recurrence agreed throughout every available
+complete window. Its only completed maximal equality runs of length at least
+four were the five intervals displayed above. These finite checks support
+implementation consistency; the argument above proves the infinite statement.
+
+The sequence and the recorded conjecture are attributed to Hoang Xuan
+Thanh. This note supplies a precise long-run statement and its proof, but
+makes no claim of priority. The literature check is limited. The proof,
+manuscript, and verification were developed with substantial assistance
+from OpenAI's ChatGPT; additional AI-assisted mathematical checks were made
+within the working session. This version has not received external human
+peer review or proof-assistant certification.
+
+\begin{thebibliography}{9}
+\small
+\bibitem{oeis}
+H.~X. Thanh, \emph{A394676}, The On-Line Encyclopedia of Integer Sequences,
+entry dated May 11, 2026.
+\url{https://oeis.org/A394676}. Consulted November 27, 2026.
+\bibitem{bounds}
+M.~V. Prizmic, \emph{Uniform bounds for greedy sequences avoiding consecutive
+sums}, research note, version 0.1, November 27, 2026.
+\url{https://github.com/markprizmic1-source/greedy-consecutive-sums}.
+AI-assisted manuscript; priority unverified.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,39 @@
+{
+  "base16_recurrence": "pass",
+  "complete_windows_checked": 399997,
+  "completed_maximal_equality_runs_of_length_at_least_four": [
+    {
+      "first_index": 1,
+      "last_index": 4,
+      "length": 4
+    },
+    {
+      "first_index": 22,
+      "last_index": 40,
+      "length": 19
+    },
+    {
+      "first_index": 358,
+      "last_index": 616,
+      "length": 259
+    },
+    {
+      "first_index": 5734,
+      "last_index": 9832,
+      "length": 4099
+    },
+    {
+      "first_index": 91750,
+      "last_index": 157288,
+      "length": 65539
+    }
+  ],
+  "exact_error_instances_checked": 399996,
+  "five_set_identity": "pass",
+  "last_selected_value": 499998,
+  "prefix_sha256": "37a25c3fa67f749388c5f7271d0c52f07af4333384eb02a94a4df1e7a054e863",
+  "scope": "Finite consistency checks; the written proof establishes the infinite claim.",
+  "sequence": "OEIS A394676",
+  "terms_generated": 400000,
+  "zero_set_identity": "pass"
+}
