@@ -1,0 +1,220 @@
+{
+  "status": "passed",
+  "scope": "finite verification only",
+  "max_distance": 25,
+  "visited_integers": 392835,
+  "edge_test_interval": [
+    -100000,
+    100000
+  ],
+  "rows": [
+    {
+      "distance": 0,
+      "layer": 1,
+      "total": 1,
+      "positive": 1,
+      "even": 0,
+      "odd": 1
+    },
+    {
+      "distance": 1,
+      "layer": 2,
+      "total": 2,
+      "positive": 1,
+      "even": 2,
+      "odd": 0
+    },
+    {
+      "distance": 2,
+      "layer": 3,
+      "total": 2,
+      "positive": 1,
+      "even": 1,
+      "odd": 1
+    },
+    {
+      "distance": 3,
+      "layer": 4,
+      "total": 4,
+      "positive": 2,
+      "even": 2,
+      "odd": 2
+    },
+    {
+      "distance": 4,
+      "layer": 5,
+      "total": 6,
+      "positive": 3,
+      "even": 4,
+      "odd": 2
+    },
+    {
+      "distance": 5,
+      "layer": 6,
+      "total": 10,
+      "positive": 5,
+      "even": 6,
+      "odd": 4
+    },
+    {
+      "distance": 6,
+      "layer": 7,
+      "total": 16,
+      "positive": 8,
+      "even": 10,
+      "odd": 6
+    },
+    {
+      "distance": 7,
+      "layer": 8,
+      "total": 26,
+      "positive": 13,
+      "even": 16,
+      "odd": 10
+    },
+    {
+      "distance": 8,
+      "layer": 9,
+      "total": 42,
+      "positive": 21,
+      "even": 26,
+      "odd": 16
+    },
+    {
+      "distance": 9,
+      "layer": 10,
+      "total": 68,
+      "positive": 34,
+      "even": 42,
+      "odd": 26
+    },
+    {
+      "distance": 10,
+      "layer": 11,
+      "total": 110,
+      "positive": 55,
+      "even": 68,
+      "odd": 42
+    },
+    {
+      "distance": 11,
+      "layer": 12,
+      "total": 178,
+      "positive": 89,
+      "even": 110,
+      "odd": 68
+    },
+    {
+      "distance": 12,
+      "layer": 13,
+      "total": 288,
+      "positive": 144,
+      "even": 178,
+      "odd": 110
+    },
+    {
+      "distance": 13,
+      "layer": 14,
+      "total": 466,
+      "positive": 233,
+      "even": 288,
+      "odd": 178
+    },
+    {
+      "distance": 14,
+      "layer": 15,
+      "total": 754,
+      "positive": 377,
+      "even": 466,
+      "odd": 288
+    },
+    {
+      "distance": 15,
+      "layer": 16,
+      "total": 1220,
+      "positive": 610,
+      "even": 754,
+      "odd": 466
+    },
+    {
+      "distance": 16,
+      "layer": 17,
+      "total": 1974,
+      "positive": 987,
+      "even": 1220,
+      "odd": 754
+    },
+    {
+      "distance": 17,
+      "layer": 18,
+      "total": 3194,
+      "positive": 1597,
+      "even": 1974,
+      "odd": 1220
+    },
+    {
+      "distance": 18,
+      "layer": 19,
+      "total": 5168,
+      "positive": 2584,
+      "even": 3194,
+      "odd": 1974
+    },
+    {
+      "distance": 19,
+      "layer": 20,
+      "total": 8362,
+      "positive": 4181,
+      "even": 5168,
+      "odd": 3194
+    },
+    {
+      "distance": 20,
+      "layer": 21,
+      "total": 13530,
+      "positive": 6765,
+      "even": 8362,
+      "odd": 5168
+    },
+    {
+      "distance": 21,
+      "layer": 22,
+      "total": 21892,
+      "positive": 10946,
+      "even": 13530,
+      "odd": 8362
+    },
+    {
+      "distance": 22,
+      "layer": 23,
+      "total": 35422,
+      "positive": 17711,
+      "even": 21892,
+      "odd": 13530
+    },
+    {
+      "distance": 23,
+      "layer": 24,
+      "total": 57314,
+      "positive": 28657,
+      "even": 35422,
+      "odd": 21892
+    },
+    {
+      "distance": 24,
+      "layer": 25,
+      "total": 92736,
+      "positive": 46368,
+      "even": 57314,
+      "odd": 35422
+    },
+    {
+      "distance": 25,
+      "layer": 26,
+      "total": 150050,
+      "positive": 75025,
+      "even": 92736,
+      "odd": 57314
+    }
+  ]
+}
