@@ -1,0 +1,22 @@
+name: Verify sequence bounds
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Run independent implementation checks
+        run: python -m unittest discover -s code -p 'test_*.py' -v
+      - name: Verify 200000 four-term sequence values
+        run: python code/verify.py --terms 200000 --window 4

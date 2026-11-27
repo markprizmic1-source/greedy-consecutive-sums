@@ -1,0 +1,309 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{needspace}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
+  pdftitle={Uniform bounds for greedy sequences avoiding consecutive sums},
+  pdfauthor={Mark Vladimir Prizmic}}
+\setlength{\emergencystretch}{2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\N}{\mathbb{N}_{>0}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+
+\title{Uniform bounds for greedy sequences\\avoiding consecutive sums}
+\author{Mark Vladimir Prizmic}
+\date{November 27, 2026\quad\textnormal{\small Version 0.1}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Fix an integer $r\ge2$. Starting with $a_1=1$, select each subsequent term
+greedily, excluding every sum of $r$ consecutive previously selected terms.
+We prove explicit bounds on both the selected sequence and its complementary
+sequence of forbidden sums. With $C_r=r(r-1)/2-1$, the bounds are
+\[
+\floor{\frac{(r+1)n-C_r-1}{r}}
+\le a_n\le
+\floor{\frac{(r+1)n-1}{r}}\qquad(n\ge1).
+\]
+Consequently $a_n=(r+1)n/r+O_r(1)$, and the selected set has natural density
+$r/(r+1)$. The case $r=4$ proves the upper bound recorded as Conjecture 1
+in OEIS A394676 and supplies a lower bound. The proof is elementary and uses
+the complementary partition together with strong induction. Exact-integer
+verification code accompanies the note.
+\end{abstract}
+
+\section{The sequence and the result}
+
+Let $r\ge2$ be fixed. Define $a_1=1$ and, once $a_1,\ldots,a_n$ have been
+chosen, let $a_{n+1}$ be the smallest integer greater than $a_n$ outside
+\begin{equation}\label{eq:forbidden}
+\left\{\sum_{t=0}^{r-1}a_{j+t}:1\le j\le n-r+1\right\}.
+\end{equation}
+The set in \eqref{eq:forbidden} is empty when $n<r$. Thus $a_1,\ldots,a_r$
+are $1,\ldots,r$. Throughout, consecutive terms means consecutive positions
+in this sequence, not necessarily consecutive integers.
+
+Hoang Xuan Thanh's OEIS entries A394576 and A394676 describe the cases
+$r=3$ and $r=4$, respectively~\cite{oeis3,oeis4}. For $r=4$, the sequence
+begins
+\[
+1,2,3,4,5,6,7,8,9,11,12,13,15,16,17,19,\ldots.
+\]
+For example, $10=1+2+3+4$ and $14=2+3+4+5$ are excluded.
+Conjecture 1 in A394676 is the inequality
+$a_n\le\floor{(5n-1)/4}$. We establish it as a special case of the following
+general result.
+
+\begin{theorem}\label{thm:main}
+For an integer $r\ge2$, define $(a_n)$ by \eqref{eq:forbidden} and put
+\[
+b_j=\sum_{t=0}^{r-1}a_{j+t},\qquad C_r=\frac{r(r-1)}2-1.
+\]
+For every $j,n\ge1$,
+\begin{equation}\label{eq:b-bounds}
+(r+1)j\le b_j\le(r+1)j+C_r,
+\end{equation}
+and
+\begin{equation}\label{eq:a-bounds}
+\floor{\frac{(r+1)n-C_r-1}{r}}
+\le a_n\le
+\floor{\frac{(r+1)n-1}{r}}.
+\end{equation}
+\end{theorem}
+
+\section{Complementarity and a floor identity}
+
+\begin{lemma}\label{lem:partition}
+The increasing sequences $(a_n)$ and $(b_j)$ partition the positive integers.
+In particular,
+\begin{equation}\label{eq:count}
+a_i-i=\#\{j:b_j<a_i\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+At each finite stage, only finitely many integers are forbidden, so the greedy
+construction continues indefinitely. The selected sequence is strictly
+increasing and hence unbounded. Also,
+\[
+b_{j+1}-b_j=a_{j+r}-a_j\ge r>0.
+\]
+The sum $b_j$ exceeds its largest summand $a_{j+r-1}$ because $r\ge2$ and
+all terms are positive. When that largest summand is selected, $b_j$ becomes
+forbidden before the construction can reach it. Thus no forbidden sum is
+selected. Conversely, every positive integer omitted by the greedy algorithm
+was skipped because it was already in the finite forbidden set. This proves
+the partition. Among $1,\ldots,a_i$, exactly $i$ integers are selected and
+$a_i-i$ are forbidden, giving \eqref{eq:count}.
+\end{proof}
+
+\begin{lemma}\label{lem:floor}
+For every integer $x$ and every positive integer $r$,
+\[
+\sum_{t=0}^{r-1}\floor{\frac{x+t}{r}}=x.
+\]
+\end{lemma}
+
+\begin{proof}
+Write $x=qr+s$ with $q\in\mathbb Z$ and $0\le s<r$. Of the $r$ terms in
+the sum, $r-s$ equal $q$ and $s$ equal $q+1$. Their sum is $qr+s=x$.
+\end{proof}
+
+\section{Proof of the bounds}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Write $C=C_r$, so $C\ge0$. We first prove \eqref{eq:b-bounds} by strong
+induction on $j$. The base case is
+\[
+b_1=1+\cdots+r=\frac{r(r+1)}2=(r+1)+C\ge r+1.
+\]
+
+Suppose $j\ge2$ and \eqref{eq:b-bounds} holds for every smaller index.
+Fix $i\in\{j,\ldots,j+r-1\}$ and put $m=a_i-i$. By
+Lemma~\ref{lem:partition}, $m$ counts the forbidden sums below $a_i$.
+Since
+\begin{equation}\label{eq:no-circularity}
+b_j>a_{j+r-1}\ge a_i,
+\end{equation}
+we have $0\le m<j$. Consequently every forbidden value counted by $m$
+has an index covered by the induction hypothesis.
+
+\medskip\noindent\textit{Upper estimate for the selected terms.}
+If $m\ge1$, then
+\[
+(r+1)m\le b_m<a_i.
+\]
+Substituting $m=a_i-i$ and using integrality gives
+\[
+r a_i\le(r+1)i-1,
+\qquad
+a_i\le U_i:=\floor{\frac{(r+1)i-1}{r}}.
+\]
+If $m=0$, then $a_i=i\le U_i$, so the same estimate holds.
+
+\medskip\noindent\textit{Lower estimate for the selected terms.}
+If $m+1<j$, the next forbidden value also has an index covered by the
+induction hypothesis, and
+\[
+a_i<b_{m+1}\le(r+1)(m+1)+C.
+\]
+Again using integrality and substituting $m=a_i-i$ gives
+\[
+r a_i\ge(r+1)i-r-C.
+\]
+Equivalently,
+\begin{equation}\label{eq:lower-i}
+a_i\ge L_i:=\floor{\frac{(r+1)i-C-1}{r}}.
+\end{equation}
+Here we used $\lceil z/r\rceil=\floor{(z+r-1)/r}$ for integer $z$.
+
+The remaining case is $m=j-1$. In this case $a_i=i+j-1$, and
+\[
+\begin{aligned}
+r a_i-\bigl((r+1)i-r-C\bigr)
+&=rj+C-i\\
+&\ge(r-1)(j-1)+C\ge0,
+\end{aligned}
+\]
+because $i\le j+r-1$. This proves \eqref{eq:lower-i} without appealing to
+the as-yet unproved upper bound on $b_j$.
+
+\medskip\noindent\textit{Summing the estimates.}
+For integer $d$, Lemma~\ref{lem:floor} gives
+\begin{equation}\label{eq:sum}
+\begin{aligned}
+\sum_{i=j}^{j+r-1}\floor{\frac{(r+1)i-d}{r}}
+&=\sum_{i=j}^{j+r-1}\left(i+\floor{\frac{i-d}{r}}\right)\\
+&=(r+1)j+\frac{r(r-1)}2-d.
+\end{aligned}
+\end{equation}
+Taking $d=C+1=r(r-1)/2$ and $d=1$ shows that
+\[
+\sum_{i=j}^{j+r-1}L_i=(r+1)j,
+\qquad
+\sum_{i=j}^{j+r-1}U_i=(r+1)j+C.
+\]
+Since $L_i\le a_i\le U_i$, these identities establish
+\eqref{eq:b-bounds} at index $j$ and complete the induction.
+
+Finally fix arbitrary $n\ge1$ and put $m=a_n-n$. The now-global lower
+bound on $b_m$ yields the upper bound in \eqref{eq:a-bounds} exactly as
+above when $m\ge1$; the case $m=0$ is immediate. For the lower bound, the
+next forbidden value $b_{m+1}$ always exists, and the now-global upper bound
+gives $a_n<b_{m+1}\le(r+1)(m+1)+C$. The same rearrangement yields
+$a_n\ge L_n$. This proves \eqref{eq:a-bounds} for every $n\ge1$.
+\end{proof}
+
+\section{Consequences and scope}
+
+\begin{corollary}\label{cor:four}
+For the sequence A394676, for every $n\ge1$,
+\[
+\boxed{\floor{\frac{5n-6}{4}}\le a_n\le\floor{\frac{5n-1}{4}}.}
+\]
+In particular,
+\[
+0\le\floor{\frac{5n-1}{4}}-a_n\le2,
+\qquad
+\lim_{n\to\infty}\frac{a_n}{n}=\frac54.
+\]
+\end{corollary}
+\begin{proof}
+Set $r=4$, for which $C_r=5$. The two floor bounds differ by at most
+$\lceil5/4\rceil=2$. Dividing by $n$ gives the limit.
+\end{proof}
+
+\Needspace{8\baselineskip}
+\begin{corollary}
+For every fixed $r\ge2$, the selected set $A=\{a_n:n\ge1\}$ has natural
+density $r/(r+1)$.
+\end{corollary}
+\begin{proof}
+Equation~\eqref{eq:a-bounds} gives $a_n=\alpha n+O_r(1)$ with
+$\alpha=(r+1)/r$. If $a_n\le x<a_{n+1}$, then
+$\#(A\cap[1,x])=n$ and $x=\alpha n+O_r(1)$. Hence the ratio of this count
+to $x$ tends to $1/\alpha=r/(r+1)$.
+\end{proof}
+
+For $r=2$, $C_r=0$ and the bounds coincide, giving
+$a_n=\floor{(3n-1)/2}$. For $r=3$, they give
+\[
+\floor{\frac{4n-3}{3}}\le a_n\le\floor{\frac{4n-1}{3}}.
+\]
+This agrees with the three-term result recorded in Goyal's manuscript
+collection~\cite{goyal}. The present argument treats all $r\ge2$ uniformly.
+It does not determine the exact locations or lengths of the equality blocks
+described in Conjecture 2 of A394676.
+
+\section{Computation and research status}
+
+The accompanying Python program generates terms directly from the greedy
+rule using a queue of forbidden sums. Its generation step does not use the
+bounds proved above. A separate verification pass checks the selected-term
+bounds, the bounds on all completely generated forbidden sums, and the
+complementary partition through the last selected term. Small cases are
+also compared with an independent implementation of the definition.
+
+For $r=4$, an exact run through $200\,000$ selected terms satisfies all
+checks and gives $a_{200000}=249999$. The observed values of
+$\floor{(5n-1)/4}-a_n$ are $0$, $1$, and $2$. The repository records the
+complete run summary and a SHA-256 digest of the generated prefix so the
+calculation can be reproduced. These finite checks support implementation
+consistency; the argument in Section~3 proves the infinite statement.
+
+\paragraph{Related work and priority.}
+The source entries attribute the sequences to Hoang Xuan Thanh. Goyal's
+repository records a proof for $r=3$ and identifies Thanh's related
+Zenodo deposit as software~\cite{goyal,thanhsoftware}. The full contents of
+that deposit were not available during preparation of this version. The
+literature check is consequently incomplete. This note makes no claim of
+priority or of being the first proof of the four-term or general result.
+The status of an OEIS conjecture label alone does not establish novelty.
+
+\paragraph{AI assistance and review.}
+The proof, its generalization, the manuscript, and the verification code
+were developed with substantial assistance from OpenAI's ChatGPT.
+Additional AI-assisted reviews checked the induction and boundary cases.
+This version has not received external human peer review and contains no
+proof-assistant certification. The written proof is provided in full for
+independent assessment.
+
+\small
+\begin{thebibliography}{9}
+\bibitem{oeis4}
+H.~X.~Thanh, \emph{A394676}, The On-Line Encyclopedia of Integer Sequences,
+entry dated May 11, 2026. \url{https://oeis.org/A394676}.
+Consulted November 27, 2026.
+
+\bibitem{oeis3}
+H.~X.~Thanh, \emph{A394576}, The On-Line Encyclopedia of Integer Sequences,
+entry dated May 11, 2026. \url{https://oeis.org/A394576}.
+Consulted November 27, 2026.
+
+\bibitem{goyal}
+D.~D.~Goyal, \emph{A greedy sequence that avoids sums of three consecutive
+terms}, manuscript entry in the \texttt{oeis-proofs} collection, 2026.
+\url{https://github.com/dvgyl/oeis-proofs/blob/main/CONTENTS.md}.
+The manuscript map and repository metadata were consulted November 27, 2026.
+
+\bibitem{thanhsoftware}
+H.~X.~Thanh, \emph{Algorithm for OEIS A394576, A394676 and generalized
+forbidden sums}, software deposit, Zenodo, 2026.
+\url{https://doi.org/10.5281/zenodo.22674326}.
+Bibliographic metadata identified in the related repository; full deposit
+not inspected for this version.
+\end{thebibliography}
+
+\end{document}

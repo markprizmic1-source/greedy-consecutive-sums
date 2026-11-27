@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite the research note if you use this proof or implementation."
+type: article
+title: "Uniform bounds for greedy sequences avoiding consecutive sums"
+authors:
+  - family-names: "Prizmic"
+    given-names: "Mark Vladimir"
+version: "0.1.0"
+date-released: 2026-11-27
+abstract: >-
+  Explicit uniform bounds for greedy sequences avoiding sums of r consecutive
+  earlier terms, for every fixed r >= 2. The four-term case proves the inequality
+  recorded as Conjecture 1 in OEIS A394676. AI-assisted research note with
+  reproducible computation. Priority remains unverified.
+keywords:
+  - greedy sequences
+  - complementary sequences
+  - integer sequences
+  - OEIS A394676
