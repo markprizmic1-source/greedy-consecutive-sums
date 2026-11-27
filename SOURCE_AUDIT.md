@@ -1,6 +1,26 @@
-# Source and priority audit
+# Source and priority audit — original bound paper
 
 Audit date: November 27, 2026. This is a record of the scope and limitations of the search, not a certification of novelty.
+
+## Scope of this audit and the additional manuscripts
+
+This document records the source search for the original root-level
+[uniform-bound paper](paper.pdf). Its statements about what that paper does
+not establish refer to that manuscript alone.
+
+The repository now also contains two complete companion arguments:
+
+- [A242364: Fibonacci layers](papers/a242364-fibonacci-layers/paper.pdf), with
+  [source and verification](papers/a242364-fibonacci-layers/README.md).
+- [A394676: exact long equality runs](papers/a394676-equality-runs/paper.pdf),
+  with [source and verification](papers/a394676-equality-runs/README.md).
+
+Their references and scope are stated in the respective papers. The Fibonacci
+note cites the related two-map generation system studied by Cox and McLellan
+in *The Fibonacci Quarterly* 55 (2017), 105–113. The equality-run note establishes
+Conjecture 2's long-run length formula and gives corrected endpoints for the
+retrieved examples. Neither manuscript makes a priority claim. The unresolved
+A402435 valuation conjecture is not included as a proved result.
 
 ## Original problem records
 
