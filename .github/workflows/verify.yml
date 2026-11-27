@@ -1,4 +1,4 @@
-name: Verify sequence bounds
+name: Verify conjecture computations
 
 on:
   push:
@@ -20,3 +20,7 @@ jobs:
         run: python -m unittest discover -s code -p 'test_*.py' -v
       - name: Verify 200000 four-term sequence values
         run: python code/verify.py --terms 200000 --window 4
+      - name: Verify Fibonacci layers through distance 25
+        run: python papers/a242364-fibonacci-layers/verify_distance.py
+      - name: Verify equality runs through 400000 selected terms
+        run: python papers/a394676-equality-runs/verify_runs.py --terms 400000
